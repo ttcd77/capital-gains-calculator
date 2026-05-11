@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import type { CGTResult, TaxpayerType } from '@/lib/types'
-import { TAXPAYER_LABELS } from '@/lib/tax-constants'
 import { formatGBP, formatGBPAccounting, formatPercent } from '@/lib/formatters'
 import { cn } from '@/lib/utils'
 
@@ -41,30 +33,15 @@ export function TaxComputation({ results, taxpayerType, onTaxpayerTypeChange }: 
           </div>
         </div>
 
-        {/* Taxpayer type 选择器 */}
-        <div className="space-y-1.5 min-w-[260px]">
+        {/* Taxpayer band — 分段控件,与 Buy/Sell 同语言 */}
+        <div className="space-y-1.5 min-w-[280px]">
           <label className="text-[10px] uppercase tracking-[0.12em] text-[var(--ink-5)] font-medium">
             Taxpayer band
           </label>
-          <Select
+          <TaxpayerBandToggle
             value={taxpayerType}
-            onValueChange={(v) => onTaxpayerTypeChange(v as TaxpayerType)}
-          >
-            <SelectTrigger className="glass-input w-full text-sm text-[var(--ink)] border-none">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="glass-panel-strong border-none">
-              {Object.entries(TAXPAYER_LABELS).map(([key, label]) => (
-                <SelectItem
-                  key={key}
-                  value={key}
-                  className="text-sm text-[var(--ink)] focus:bg-[rgba(20,24,31,0.06)] focus:text-[var(--ink)]"
-                >
-                  {label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            onChange={onTaxpayerTypeChange}
+          />
         </div>
       </div>
 
@@ -124,6 +101,67 @@ export function TaxComputation({ results, taxpayerType, onTaxpayerTypeChange }: 
         Rates and thresholds reflect the 2024 / 25 UK tax year.
       </p>
     </div>
+  )
+}
+
+// ============================================================
+// Taxpayer band toggle — 分段控件
+// 两档 (Basic / Higher) 用 segmented control 表达,无 dropdown,
+// 视觉与 TransactionForm 的 Buy/Sell 同语言。
+// shares 用 10/18,property 18% 不在 calculator scope 内,这里 18% 不显示。
+// ============================================================
+function TaxpayerBandToggle({
+  value,
+  onChange,
+}: {
+  value: TaxpayerType
+  onChange: (v: TaxpayerType) => void
+}) {
+  return (
+    <div className="glass-input p-0.5 flex">
+      <BandBtn
+        active={value === 'basic'}
+        onClick={() => onChange('basic')}
+        label="Basic"
+        rate="10%"
+      />
+      <BandBtn
+        active={value === 'higher'}
+        onClick={() => onChange('higher')}
+        label="Higher"
+        rate="20%"
+      />
+    </div>
+  )
+}
+
+function BandBtn({
+  active,
+  onClick,
+  label,
+  rate,
+}: {
+  active: boolean
+  onClick: () => void
+  label: string
+  rate: string
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        'flex-1 px-3 py-2 text-xs rounded-md transition-colors flex items-center justify-center gap-2',
+        active
+          ? 'bg-[var(--ink)] text-white font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.20)]'
+          : 'text-[var(--ink-3)] font-medium hover:text-[var(--ink)]'
+      )}
+    >
+      <span>{label}</span>
+      <span className={cn('num text-[10px]', active ? 'opacity-80' : 'text-[var(--ink-5)]')}>
+        {rate}
+      </span>
+    </button>
   )
 }
 

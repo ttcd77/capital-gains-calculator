@@ -397,18 +397,24 @@ function TaxComputationPlaceholder({
           </div>
         </div>
 
-        <div className="space-y-1.5 min-w-[260px]">
+        <div className="space-y-1.5 min-w-[280px]">
           <label className="text-[10px] uppercase tracking-[0.12em] text-[var(--ink-5)] font-medium">
             Taxpayer band
           </label>
-          <select
-            value={taxpayerType}
-            onChange={(e) => onTaxpayerTypeChange(e.target.value as TaxpayerType)}
-            className="glass-input w-full text-sm text-[var(--ink)] px-3 py-2 border-none cursor-pointer"
-          >
-            <option value="basic">Basic-rate taxpayer (10% / 18%)</option>
-            <option value="higher">Higher-rate taxpayer (20% / 24%)</option>
-          </select>
+          <div className="glass-input p-0.5 flex">
+            <PlaceholderBandBtn
+              active={taxpayerType === 'basic'}
+              onClick={() => onTaxpayerTypeChange('basic')}
+              label="Basic"
+              rate="10%"
+            />
+            <PlaceholderBandBtn
+              active={taxpayerType === 'higher'}
+              onClick={() => onTaxpayerTypeChange('higher')}
+              label="Higher"
+              rate="20%"
+            />
+          </div>
         </div>
       </div>
 
@@ -444,6 +450,37 @@ function TaxComputationPlaceholder({
 }
 
 // ===== Placeholder 小组件 =====
+
+// Placeholder 内的 taxpayer band 分段按钮 — 占位状态下也可交互
+function PlaceholderBandBtn({
+  active,
+  onClick,
+  label,
+  rate,
+}: {
+  active: boolean
+  onClick: () => void
+  label: string
+  rate: string
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        'flex-1 px-3 py-2 text-xs rounded-md transition-colors flex items-center justify-center gap-2',
+        active
+          ? 'bg-[var(--ink)] text-white font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(0,0,0,0.20)]'
+          : 'text-[var(--ink-3)] font-medium hover:text-[var(--ink)]'
+      )}
+    >
+      <span>{label}</span>
+      <span className={cn('num text-[10px]', active ? 'opacity-80' : 'text-[var(--ink-5)]')}>
+        {rate}
+      </span>
+    </button>
+  )
+}
 
 function PlaceholderMetric({
   label,

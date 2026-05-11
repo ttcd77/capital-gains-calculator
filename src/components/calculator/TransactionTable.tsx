@@ -86,7 +86,7 @@ export function TransactionTable({ transactions, onRemove, errorTransactionIds }
                     'group transition-colors',
                     !isLast && 'border-b border-[var(--hairline-soft)]',
                     isError
-                      ? 'bg-[rgba(20,24,31,0.04)]'
+                      ? 'bg-[rgba(26,28,30,0.04)]'
                       : 'hover:bg-white/35'
                   )}
                 >
@@ -132,7 +132,7 @@ export function TransactionTable({ transactions, onRemove, errorTransactionIds }
                     <button
                       onClick={() => onRemove(t.id)}
                       aria-label="Remove transaction"
-                      className="opacity-0 group-hover:opacity-100 h-7 w-7 inline-flex items-center justify-center rounded-md text-[var(--ink-5)] hover:text-[var(--ink)] hover:bg-[rgba(20,24,31,0.06)] transition"
+                      className="opacity-0 group-hover:opacity-100 h-7 w-7 inline-flex items-center justify-center rounded-md text-[var(--ink-5)] hover:text-[var(--ink)] hover:bg-[rgba(26,28,30,0.06)] transition"
                     >
                       <X className="h-3.5 w-3.5" />
                     </button>

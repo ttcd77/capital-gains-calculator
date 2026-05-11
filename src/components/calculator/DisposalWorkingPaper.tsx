@@ -74,7 +74,7 @@ function TickerSection({
   return (
     <div className={!isLast ? 'border-b-2 border-[var(--hairline-strong)]' : ''}>
       {/* Ticker 段头 — 强分隔 */}
-      <div className="px-5 py-3 bg-[rgba(20,24,31,0.025)] flex items-center justify-between flex-wrap gap-3">
+      <div className="px-5 py-3 bg-[rgba(26,28,30,0.025)] flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <span className="num text-base font-semibold tracking-wider text-[var(--ink)]">
             {ticker}
