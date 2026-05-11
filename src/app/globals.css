@@ -1,0 +1,313 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* ============================================================
+     单色调色板 — 石墨 + 灰阶
+     完全没有色相变化。所有强调只通过明度/字重/字号实现。
+     盈亏不用红绿,用传统会计括号写法 (£X) 表示负数。
+     ============================================================ */
+
+  /* 文字层级(冷调灰,从几乎黑到极浅) */
+  --ink:         #14181f;  /* 最深 — 主标题 / 关键数字 / 行动按钮 */
+  --ink-2:       #2c3340;  /* 正文 */
+  --ink-3:       #525968;  /* 次要 */
+  --ink-4:       #828999;  /* 弱化 */
+  --ink-5:       #a8adb8;  /* 标签 / 单位 */
+  --ink-6:       #c8ccd4;  /* 极弱 / 分隔线 */
+
+  /* 边线 */
+  --hairline:        rgba(20, 24, 31, 0.08);
+  --hairline-strong: rgba(20, 24, 31, 0.14);
+  --hairline-soft:   rgba(20, 24, 31, 0.05);
+
+  /* 玻璃配方(白雾) */
+  --glass-tint:        rgba(255, 255, 255, 0.60);
+  --glass-tint-strong: rgba(255, 255, 255, 0.78);
+  --glass-tint-quiet:  rgba(255, 255, 255, 0.40);
+  --glass-border:      rgba(255, 255, 255, 0.68);
+
+  /* shadcn vars — 保留兼容,全部映射到石墨灰阶 */
+  --background: #e7eaef;
+  --foreground: var(--ink);
+  --card: rgba(255, 255, 255, 0.6);
+  --card-foreground: var(--ink);
+  --popover: #f7f8fa;
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: #ffffff;
+  --secondary: rgba(255, 255, 255, 0.5);
+  --secondary-foreground: var(--ink);
+  --muted: rgba(255, 255, 255, 0.45);
+  --muted-foreground: var(--ink-3);
+  --accent: var(--ink);
+  --accent-foreground: #ffffff;
+  --destructive: var(--ink);
+  --border: var(--hairline);
+  --input: rgba(255, 255, 255, 0.5);
+  --ring: rgba(20, 24, 31, 0.25);
+  --chart-1: var(--ink);
+  --chart-2: var(--ink-2);
+  --chart-3: var(--ink-3);
+  --chart-4: var(--ink-4);
+  --chart-5: var(--ink-5);
+  --sidebar: rgba(255, 255, 255, 0.55);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(20, 24, 31, 0.08);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--hairline);
+  --sidebar-ring: rgba(20, 24, 31, 0.25);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html, body {
+    color: var(--ink);
+  }
+
+  body {
+    /* 纯净浅冷灰渐变,无辉光,无暖色折射 */
+    background-color: #e4e7ec;
+    background-image: linear-gradient(180deg, #dfe3e9 0%, #e6e9ee 55%, #e3e6eb 100%);
+    background-attachment: fixed;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  button[data-variant="outline"] {
+    border-color: var(--hairline-strong);
+  }
+}
+
+/* ============================================================
+   Liquid Glass utilities
+   ============================================================ */
+
+@layer utilities {
+
+  /* 主玻璃面板 */
+  .glass-panel {
+    backdrop-filter: blur(32px) url(#glass-lg) saturate(160%);
+    -webkit-backdrop-filter: blur(32px) saturate(160%);
+    background-color: var(--glass-tint);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 1px 0 0 rgba(255, 255, 255, 0.45),
+      inset -1px 0 0 rgba(255, 255, 255, 0.30),
+      inset 0 -1px 0 rgba(20, 24, 31, 0.04),
+      0 1px 2px rgba(20, 24, 31, 0.04),
+      0 8px 24px -8px rgba(20, 24, 31, 0.08),
+      0 24px 48px -24px rgba(20, 24, 31, 0.10);
+    border-radius: 16px;
+  }
+
+  .glass-panel-strong {
+    backdrop-filter: blur(40px) url(#glass-lg) saturate(170%);
+    -webkit-backdrop-filter: blur(40px) saturate(170%);
+    background-color: var(--glass-tint-strong);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 1px 0 0 rgba(255, 255, 255, 0.55),
+      inset -1px 0 0 rgba(255, 255, 255, 0.40),
+      inset 0 -1px 0 rgba(20, 24, 31, 0.05),
+      0 2px 4px rgba(20, 24, 31, 0.05),
+      0 16px 40px -12px rgba(20, 24, 31, 0.12),
+      0 32px 64px -24px rgba(20, 24, 31, 0.14);
+    border-radius: 18px;
+  }
+
+  .glass-chip {
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    background-color: var(--glass-tint-quiet);
+    border: 1px solid rgba(255, 255, 255, 0.50);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      inset 0 -1px 0 rgba(20, 24, 31, 0.04);
+    border-radius: 8px;
+  }
+
+  /* 输入框 — 玻璃凹陷 */
+  .glass-input {
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--hairline-strong);
+    box-shadow:
+      inset 0 1px 2px rgba(20, 24, 31, 0.05),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .glass-input:focus-within,
+  .glass-input:focus {
+    border-color: var(--ink);
+    box-shadow:
+      inset 0 1px 2px rgba(20, 24, 31, 0.05),
+      0 0 0 3px rgba(20, 24, 31, 0.12);
+  }
+
+  /* 主按钮 — 石墨实心 + 玻璃高光 */
+  .ink-btn {
+    background: linear-gradient(180deg, #232936 0%, #14181f 100%);
+    color: #ffffff;
+    border: 1px solid rgba(20, 24, 31, 0.6);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+      0 1px 2px rgba(20, 24, 31, 0.20),
+      0 6px 16px -6px rgba(20, 24, 31, 0.30);
+    border-radius: 8px;
+    transition: transform 80ms ease, box-shadow 120ms ease, background 120ms ease;
+  }
+  .ink-btn:hover:not(:disabled) {
+    background: linear-gradient(180deg, #2c3340 0%, #1a1f29 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+      0 2px 4px rgba(20, 24, 31, 0.24),
+      0 10px 24px -8px rgba(20, 24, 31, 0.40);
+  }
+  .ink-btn:active:not(:disabled) {
+    transform: translateY(0.5px);
+  }
+  .ink-btn:disabled {
+    opacity: 0.32;
+    cursor: not-allowed;
+  }
+
+  /* 次按钮 — 玻璃 + 石墨字 */
+  .ghost-btn {
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    background-color: rgba(255, 255, 255, 0.45);
+    color: var(--ink-2);
+    border: 1px solid var(--hairline-strong);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      0 1px 2px rgba(20, 24, 31, 0.04);
+    border-radius: 8px;
+    transition: background-color 120ms ease, color 120ms ease;
+  }
+  .ghost-btn:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: var(--ink);
+  }
+
+  /* Outline 徽章 — 替代所有色块徽章 */
+  .ink-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    border: 1px solid var(--hairline-strong);
+    border-radius: 4px;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+  .ink-pill-strong {
+    color: var(--ink);
+    border-color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* 章节标签 */
+  .step-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.625rem 0.25rem 0.375rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--hairline-strong);
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .step-tag::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background-color: var(--ink);
+  }
+
+  /* Mono 数字 */
+  .num {
+    font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .num-display {
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  /* 负数会计括号写法 — 标记类,但样式由组件决定 */
+  .neg::before { content: "("; }
+  .neg::after  { content: ")"; }
+}
