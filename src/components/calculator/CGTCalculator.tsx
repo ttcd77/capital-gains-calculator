@@ -406,13 +406,13 @@ function TaxComputationPlaceholder({
               active={taxpayerType === 'basic'}
               onClick={() => onTaxpayerTypeChange('basic')}
               label="Basic"
-              rate="10%"
+              rate="18%"
             />
             <PlaceholderBandBtn
               active={taxpayerType === 'higher'}
               onClick={() => onTaxpayerTypeChange('higher')}
               label="Higher"
-              rate="20%"
+              rate="24%"
             />
           </div>
         </div>

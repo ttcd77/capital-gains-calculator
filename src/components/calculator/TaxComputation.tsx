@@ -123,13 +123,13 @@ function TaxpayerBandToggle({
         active={value === 'basic'}
         onClick={() => onChange('basic')}
         label="Basic"
-        rate="10%"
+        rate="18%"
       />
       <BandBtn
         active={value === 'higher'}
         onClick={() => onChange('higher')}
         label="Higher"
-        rate="20%"
+        rate="24%"
       />
     </div>
   )

@@ -51,26 +51,23 @@
   --radius: 0.875rem;
 
   /* ============================================================
-     单色调色板 — 暖中性灰阶
+     单色调色板 — 石墨 + 灰阶
      完全没有色相变化。所有强调只通过明度/字重/字号实现。
      盈亏不用红绿,用传统会计括号写法 (£X) 表示负数。
-     ----
-     暖调取向:与作品集主站(暖奶油 #f7f5f0 + 暖炭 #1a1c1e)
-     同色温家族,calculator 在 portfolio iframe 中嵌入时不出现冷暖跳色。
      ============================================================ */
 
-  /* 文字层级(暖中性灰,从近黑到极浅) */
-  --ink:         #1a1c1e;  /* 最深 — 主标题 / 关键数字 / 行动按钮(与作品集对齐) */
-  --ink-2:       #373838;  /* 正文 */
-  --ink-3:       #5f5e5c;  /* 次要 */
-  --ink-4:       #8d8b87;  /* 弱化 */
-  --ink-5:       #b3b0aa;  /* 标签 / 单位 */
-  --ink-6:       #d2cfc8;  /* 极弱 / 分隔线 */
+  /* 文字层级(冷调灰,从几乎黑到极浅) */
+  --ink:         #14181f;  /* 最深 — 主标题 / 关键数字 / 行动按钮 */
+  --ink-2:       #2c3340;  /* 正文 */
+  --ink-3:       #525968;  /* 次要 */
+  --ink-4:       #828999;  /* 弱化 */
+  --ink-5:       #a8adb8;  /* 标签 / 单位 */
+  --ink-6:       #c8ccd4;  /* 极弱 / 分隔线 */
 
-  /* 边线(暖中性,与 ink 同基) */
-  --hairline:        rgba(26, 28, 30, 0.08);
-  --hairline-strong: rgba(26, 28, 30, 0.14);
-  --hairline-soft:   rgba(26, 28, 30, 0.05);
+  /* 边线 */
+  --hairline:        rgba(20, 24, 31, 0.08);
+  --hairline-strong: rgba(20, 24, 31, 0.14);
+  --hairline-soft:   rgba(20, 24, 31, 0.05);
 
   /* 玻璃配方(白雾) */
   --glass-tint:        rgba(255, 255, 255, 0.60);
@@ -78,12 +75,12 @@
   --glass-tint-quiet:  rgba(255, 255, 255, 0.40);
   --glass-border:      rgba(255, 255, 255, 0.68);
 
-  /* shadcn vars — 保留兼容,全部映射到暖中性灰阶 */
-  --background: #ece8e0;
+  /* shadcn vars — 保留兼容,全部映射到石墨灰阶 */
+  --background: #e7eaef;
   --foreground: var(--ink);
   --card: rgba(255, 255, 255, 0.6);
   --card-foreground: var(--ink);
-  --popover: #f7f5f0;
+  --popover: #f7f8fa;
   --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: #ffffff;
@@ -96,7 +93,7 @@
   --destructive: var(--ink);
   --border: var(--hairline);
   --input: rgba(255, 255, 255, 0.5);
-  --ring: rgba(26, 28, 30, 0.25);
+  --ring: rgba(20, 24, 31, 0.25);
   --chart-1: var(--ink);
   --chart-2: var(--ink-2);
   --chart-3: var(--ink-3);
@@ -106,10 +103,10 @@
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--ink);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(26, 28, 30, 0.08);
+  --sidebar-accent: rgba(20, 24, 31, 0.08);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--hairline);
-  --sidebar-ring: rgba(26, 28, 30, 0.25);
+  --sidebar-ring: rgba(20, 24, 31, 0.25);
 }
 
 @layer base {
@@ -122,9 +119,9 @@
   }
 
   body {
-    /* 暖中性渐变 — 与 selfloom 主站 #f7f5f0 暖奶油同色温家族 */
-    background-color: #ebe8e0;
-    background-image: linear-gradient(180deg, #e3e0d7 0%, #ebe8e0 55%, #e7e4db 100%);
+    /* 纯净浅冷灰渐变,无辉光,无暖色折射 */
+    background-color: #e4e7ec;
+    background-image: linear-gradient(180deg, #dfe3e9 0%, #e6e9ee 55%, #e3e6eb 100%);
     background-attachment: fixed;
     font-feature-settings: "cv11", "ss01";
   }
@@ -150,10 +147,10 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.9),
       inset 1px 0 0 rgba(255, 255, 255, 0.45),
       inset -1px 0 0 rgba(255, 255, 255, 0.30),
-      inset 0 -1px 0 rgba(26, 28, 30, 0.04),
-      0 1px 2px rgba(26, 28, 30, 0.04),
-      0 8px 24px -8px rgba(26, 28, 30, 0.08),
-      0 24px 48px -24px rgba(26, 28, 30, 0.10);
+      inset 0 -1px 0 rgba(20, 24, 31, 0.04),
+      0 1px 2px rgba(20, 24, 31, 0.04),
+      0 8px 24px -8px rgba(20, 24, 31, 0.08),
+      0 24px 48px -24px rgba(20, 24, 31, 0.10);
     border-radius: 16px;
   }
 
@@ -166,10 +163,10 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.95),
       inset 1px 0 0 rgba(255, 255, 255, 0.55),
       inset -1px 0 0 rgba(255, 255, 255, 0.40),
-      inset 0 -1px 0 rgba(26, 28, 30, 0.05),
-      0 2px 4px rgba(26, 28, 30, 0.05),
-      0 16px 40px -12px rgba(26, 28, 30, 0.12),
-      0 32px 64px -24px rgba(26, 28, 30, 0.14);
+      inset 0 -1px 0 rgba(20, 24, 31, 0.05),
+      0 2px 4px rgba(20, 24, 31, 0.05),
+      0 16px 40px -12px rgba(20, 24, 31, 0.12),
+      0 32px 64px -24px rgba(20, 24, 31, 0.14);
     border-radius: 18px;
   }
 
@@ -180,7 +177,7 @@
     border: 1px solid rgba(255, 255, 255, 0.50);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.65),
-      inset 0 -1px 0 rgba(26, 28, 30, 0.04);
+      inset 0 -1px 0 rgba(20, 24, 31, 0.04);
     border-radius: 8px;
   }
 
@@ -191,7 +188,7 @@
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid var(--hairline-strong);
     box-shadow:
-      inset 0 1px 2px rgba(26, 28, 30, 0.05),
+      inset 0 1px 2px rgba(20, 24, 31, 0.05),
       inset 0 0 0 1px rgba(255, 255, 255, 0.35);
     border-radius: 8px;
     transition: border-color 120ms ease, box-shadow 120ms ease;
@@ -200,30 +197,30 @@
   .glass-input:focus {
     border-color: var(--ink);
     box-shadow:
-      inset 0 1px 2px rgba(26, 28, 30, 0.05),
-      0 0 0 3px rgba(26, 28, 30, 0.12);
+      inset 0 1px 2px rgba(20, 24, 31, 0.05),
+      0 0 0 3px rgba(20, 24, 31, 0.12);
   }
 
   /* 主按钮 — 石墨实心 + 玻璃高光 */
   .ink-btn {
-    background: linear-gradient(180deg, #2d2e2c 0%, #1a1c1e 100%);
+    background: linear-gradient(180deg, #232936 0%, #14181f 100%);
     color: #ffffff;
-    border: 1px solid rgba(26, 28, 30, 0.6);
+    border: 1px solid rgba(20, 24, 31, 0.6);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.18),
       inset 0 -1px 0 rgba(0, 0, 0, 0.30),
-      0 1px 2px rgba(26, 28, 30, 0.20),
-      0 6px 16px -6px rgba(26, 28, 30, 0.30);
+      0 1px 2px rgba(20, 24, 31, 0.20),
+      0 6px 16px -6px rgba(20, 24, 31, 0.30);
     border-radius: 8px;
     transition: transform 80ms ease, box-shadow 120ms ease, background 120ms ease;
   }
   .ink-btn:hover:not(:disabled) {
-    background: linear-gradient(180deg, #3a3a37 0%, #22231f 100%);
+    background: linear-gradient(180deg, #2c3340 0%, #1a1f29 100%);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.22),
       inset 0 -1px 0 rgba(0, 0, 0, 0.30),
-      0 2px 4px rgba(26, 28, 30, 0.24),
-      0 10px 24px -8px rgba(26, 28, 30, 0.40);
+      0 2px 4px rgba(20, 24, 31, 0.24),
+      0 10px 24px -8px rgba(20, 24, 31, 0.40);
   }
   .ink-btn:active:not(:disabled) {
     transform: translateY(0.5px);
@@ -242,7 +239,7 @@
     border: 1px solid var(--hairline-strong);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.55),
-      0 1px 2px rgba(26, 28, 30, 0.04);
+      0 1px 2px rgba(20, 24, 31, 0.04);
     border-radius: 8px;
     transition: background-color 120ms ease, color 120ms ease;
   }
